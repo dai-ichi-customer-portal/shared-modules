@@ -40,7 +40,7 @@ tasks.named('test') {
 }
 
 task buildJar(type: Jar) {
-	archiveBaseName = 'igsaas-shared-library'
+	archiveBaseName = 'dai-ichi-customer-portal'
 	from sourceSets.main.output
 }
 
