@@ -58,7 +58,7 @@ publishing {
 
 	publications {
 		gpr(MavenPublication) {
-			groupId = "daiichi"
+			groupId = "dai-ichi-customer-portal"
 			artifactId = "shared-modules"
 			artifact buildJar
 			version = "0.0.1-SNAPSHOT"
