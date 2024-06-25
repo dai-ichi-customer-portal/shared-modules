@@ -46,8 +46,8 @@ public class LoggerFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected boolean shouldNotFilter(@NonNull final HttpServletRequest request) throws ServletException {
-        return SHOULD_NOT_FILTER_PATHS.stream().noneMatch(path -> MATCHER.match(path, request.getRequestURI()));
+    protected boolean shouldNotFilter(@NonNull final HttpServletRequest request) {
+        return SHOULD_NOT_FILTER_PATHS.stream().anyMatch(path -> MATCHER.match(path, request.getRequestURI()));
     }
 
     @Override
