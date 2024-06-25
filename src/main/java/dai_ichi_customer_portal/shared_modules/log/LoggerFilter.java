@@ -7,8 +7,10 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
@@ -16,10 +18,17 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Slf4j
 @Component
 public class LoggerFilter extends OncePerRequestFilter {
+
+    private static final AntPathMatcher MATCHER = new AntPathMatcher();
+    private static final List<String> SHOULD_NOT_FILTER_PATHS = List.of(
+            "/actuator/health/**"
+    );
+
     private String getStringValue(byte[] contentAsByteArray, String characterEncoding) {
         try {
             return new String(contentAsByteArray, characterEncoding);
@@ -34,6 +43,11 @@ public class LoggerFilter extends OncePerRequestFilter {
                 || fieldName.contains("username")
                 || fieldName.contains("userCode")
                 || fieldName.contains("otp");
+    }
+
+    @Override
+    protected boolean shouldNotFilter(@NonNull final HttpServletRequest request) throws ServletException {
+        return SHOULD_NOT_FILTER_PATHS.stream().noneMatch(path -> MATCHER.match(path, request.getRequestURI()));
     }
 
     @Override
