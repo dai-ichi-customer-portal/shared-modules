@@ -78,7 +78,6 @@ public class LoggerFilter extends OncePerRequestFilter {
         log.info("Finish Processing: IP={}; Method={}; RequestURI={}; Request Payload={}; HttpStatus={}; Time Taken={}",
                 request.getRemoteHost(), request.getMethod(), request.getRequestURI(), requestBody, response.getStatus(), timeTaken);
 
-        System.out.println(responseBody);
         // Copy the cached response body to the original response object
         responseWrapper.copyBodyToResponse();
     }
@@ -97,7 +96,7 @@ public class LoggerFilter extends OncePerRequestFilter {
 
             return payloadJson.toString();
         } catch (IOException e) {
-            throw new RuntimeException("Error processing JSON payload", e);
+            return "";
         }
     }
 }
