@@ -26,7 +26,7 @@ public class LoggerFilter extends OncePerRequestFilter {
 
     private static final AntPathMatcher MATCHER = new AntPathMatcher();
     private static final List<String> SHOULD_NOT_FILTER_PATHS = List.of(
-            "/actuator/health/**"
+            "/api/v1/actuator/**"
     );
 
     private String getStringValue(byte[] contentAsByteArray, String characterEncoding) {
