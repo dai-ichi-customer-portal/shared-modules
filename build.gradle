@@ -61,7 +61,7 @@ publishing {
 			groupId = "dai-ichi-customer-portal"
 			artifactId = "shared-modules"
 			artifact buildJar
-			version = "0.0.1-SNAPSHOT"
+			version = "0.0.2-SNAPSHOT"
 			from(components.java)
 			versionMapping {
 				usage('java-api') {
