@@ -48,6 +48,7 @@ public class GlobalExceptionFilter {
     @ExceptionHandler(AbstractInternalServerErrorException.class)
     public final ResponseEntity<Object> handelInternalServerErrorException(final AbstractInternalServerErrorException exception) {
         log.error(exception.getMessage());
+        exception.printStackTrace();
         final var error = new HashMap<String, Object>();
         error.put("code", HttpStatus.INTERNAL_SERVER_ERROR);
         error.put("message", "Internal Server Error.");
@@ -57,6 +58,7 @@ public class GlobalExceptionFilter {
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Object> handelException(final Exception exception) {
         log.error(exception.getMessage());
+        exception.printStackTrace();
         final var error = new HashMap<String, Object>();
         error.put("code", HttpStatus.INTERNAL_SERVER_ERROR);
         error.put("message", "Internal Server Error.");
